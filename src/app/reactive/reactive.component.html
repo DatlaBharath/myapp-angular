@@ -1,0 +1,25 @@
+<form class="space-y-2 px-16 text-xl" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <p>Product Form - Reactive</p>
+    <div>
+        <label for="productId">ProductId : </label>
+        <input type="text" formControlName="productId" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div>
+        <label for="brand">Brand : </label>
+        <input type="text" formControlName="brand" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div>
+        <label for="name">ProductName : </label>
+        <input type="text" formControlName="description" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div>
+        <label for="qty">Qty : </label>
+        <input type="text" formControlName="qty" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div>
+        <label for="price">Price : </label>
+        <input type="text" formControlName="price" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+
+    <button class="text-white bg-blue-400 disabled:text-gray-400 disabled:bg-blue-200 rounded-lg p-2" type="submit" [disabled]="!productForm.valid">Submit</button>
+</form>

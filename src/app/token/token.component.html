@@ -1,0 +1,13 @@
+<p>token works!</p>
+<button (click)="getToken()">Hey Click Me n Get Tokens</button><br>
+<button (click)="getGreet()">Hey Click Me n Get Greet</button><br>
+<button (click)="getPosts()">Hey Click Me n Get Posts</button>
+
+<div *ngFor="let item of posts">
+    <div class="mx-32 p-4 text-white bg-green-500 rounded-lg my-4">
+        userId : {{item.userId}} <br>
+        id : {{item.id}} <br>
+        title : {{item.title}} <br>
+        body : {{item.body}} <br>
+    </div>
+</div>

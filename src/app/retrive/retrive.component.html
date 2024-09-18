@@ -1,0 +1,8 @@
+<button (click)="onSubmit()">Get Products</button>
+<div *ngFor="let item of products">
+    {{item.productId}}
+    {{item.brand}}
+    {{item.description}}
+    {{item.qty}}
+    {{item.price}}
+</div>

@@ -1,0 +1,35 @@
+<form class="space-y-2 px-16 text-xl" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <p>Product Form - Reactive FormBuilder</p>
+    <div>
+        <label for="productId">ProductId : </label>
+        <input type="text" formControlName="productId" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div>
+        <label for="brand">Brand : </label>
+        <input type="text" formControlName="brand" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div formGroupName="description">
+        <label for="age">Age : </label>
+        <input type="text"  formControlName="age" class="p-1 ring-1 ring-inset ring-gray-300"><br><br>
+        <label for="seasons">Season : </label>
+        <input type="text" formControlName="seasons" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div>
+        <label for="qty">Qty : </label>
+        <input type="text" formControlName="qty" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div>
+        <label for="price">Price : </label>
+        <input type="text" formControlName="price" class="p-1 ring-1 ring-inset ring-gray-300">
+    </div>
+    <div formArrayName="suppliers">
+        <label for="">Suppliers</label>
+        <button (click)="addNewSupplier()" class="text-white bg-blue-400 rounded-lg p-2 m-2"> Add New Supplier</button>
+        <div *ngFor="let supplier of suppliers.controls;let i=index">
+
+            <label for="">New Supplier: <input class="p-1 ring-1 ring-inset ring-gray-300" type="text" [formControlName]="i" /></label>
+
+        </div>
+    </div>
+    <button class="text-white bg-blue-400 disabled:text-gray-400 disabled:bg-blue-200 rounded-lg p-2" type="submit" [disabled]="!productForm.valid">Submit</button>
+</form>

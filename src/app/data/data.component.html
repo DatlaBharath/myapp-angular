@@ -1,0 +1,160 @@
+<div class="h-96">
+    Search : <input class="border-solid border-1 bg-slate-200 border-gray-800" type="text" [(ngModel)]="search">
+    <div *ngFor="let item of productData">
+        <div *ngIf="(item.brand.slice(0,search.length) == search || item.description.slice(0,search.length) == search || item.price.toString().slice(0,search.length) == search) && search !=''">
+            {{item.productId}}
+            {{item.brand}}
+            {{item.description}}
+            {{item.qty}}
+            {{item.price}}
+        </div>
+    </div>
+</div>
+
+<div>
+    <nav class="w-screen flex px-16  py-3 space-x-6 text-xl bg-slate-800 text-white" >
+        <div class="w-fit me-auto my-auto text-2xl">My Products</div>
+        <div class=" w-fit h-fit my-auto space-x-2" >
+            <input class="text-black" type="text" placeholder="brand" [(ngModel)]="brand" (input)="counted()">
+            <input class="text-black" type="text" placeholder="product name" [(ngModel)]="prod" (input)="counted()">
+            <input class="text-black" type="text" placeholder="price" [(ngModel)]="price" (input)="counted()">
+        </div>
+    </nav>
+
+    <div class="px-32">
+        Total Count : {{counted().length}}
+        <div class="flex flex-wrap">
+            <div *ngFor="let item of counted()">
+                <div class="p-5 rounded-xl bg-orange-300 justify-center m-2 w-48 h-64">
+                    <div class="text-xl text-white text-center">{{item.brand}}</div>
+                    <div class="text-xl bg-white py-16 text-black text-center rounded-xl">{{item.description}}</div>
+                    <div class="flex">
+                        <div class="text-white me-auto w-fit">{{item.qty}} pieces</div>
+                        <div class="text-white w-fit">{{item.price}} Rs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form (ngSubmit) = "onSubmit()" class="px-20">
+        <div class="border-b border-gray-900/10 pb-12">
+      
+            <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
+              <div class="sm:col-span-3 form-group">
+                <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Product Id</label>
+                <div class="mt-2">
+                  <input type="text" name="first-name"  id="first-name" autocomplete="given-name" [(ngModel)]="prodobj.productId" class="form-control block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #valFirstName = "ngModel" minlength="4" required>
+                  <div *ngIf="valFirstName.invalid && valFirstName.touched">
+                      <div *ngIf="valFirstName.errors?.['required']" class="bg-red-400">ProductId is Required</div>
+                      <div *ngIf="valFirstName.errors?.['minlength']" class="bg-red-400">length is atleast 4 charecters</div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="sm:col-span-3 form-group">
+                <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Brand</label>
+                <div class="mt-2">
+                  <input type="text" name="last-name" id="last-name" autocomplete="family-name" [(ngModel)]="prodobj.brand" class="form-control block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #valBrand = "ngModel" minlength="3" required>
+                </div>
+                <div *ngIf="valBrand.invalid && valBrand.touched">
+                    <div *ngIf="valBrand.errors?.['required']" class="bg-red-400">Brand is Required</div>
+                    <div *ngIf="valBrand.errors?.['minlength']" class="bg-red-400">Brand is atleast 3 charecters</div>
+                </div>
+              </div>
+      
+              <div class="sm:col-span-4 form-group">
+                <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Product Name</label>
+                <div class="mt-2">
+                  <input id="email" name="email" type="text" autocomplete="email" [(ngModel)]="prodobj.description" class="form-control block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #valName = "ngModel" minlength="3" required>
+                  <div *ngIf="valName.invalid && valName.touched">
+                      <div *ngIf="valName.errors?.['required']" class="bg-red-400">ProductName is Required</div>
+                      <div *ngIf="valName.errors?.['minlength']" class="bg-red-400">length is atleast 3 charecters</div>
+                  </div>
+                </div>
+              </div>
+
+      
+              <div class="col-span-full form-group">
+                <label for="street-address" class="block text-sm font-medium leading-6 text-gray-900">Quantity</label>
+                <div class="mt-2">
+                  <input type="number" name="street-address" id="street-address" [(ngModel)]="prodobj.qty" autocomplete="street-address" class="form-control block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" #valQty = "ngModel" min="4" required>
+                  <div *ngIf="valQty.invalid && valQty.touched">
+                    <div *ngIf="valQty.errors?.['required']" class="bg-red-400">Quantity is Required</div>
+                    <div *ngIf="valQty.errors?.['min']" class="bg-red-400">Quantity is atleast 4 units</div>
+                   </div>
+                </div>
+              </div>
+      
+              <div class="sm:col-span-2 sm:col-start-1 form-group">
+                <label for="city" class="block text-sm font-medium leading-6 text-gray-900">Price</label>
+                <div class="mt-2">
+                  <input type="number" name="city" id="city" autocomplete="address-level2" [(ngModel)]="prodobj.price" class="form-control block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"  #valPrice = "ngModel" min="10" required>
+                  <div *ngIf="valPrice.invalid && valPrice.touched">
+                    <div *ngIf="valPrice.errors?.['required']" class="bg-red-400">Price is Required</div>
+                    <div *ngIf="valPrice.errors?.['min']" class="bg-red-400">Price Should Be Grater Than 10₹</div>
+                  </div>
+                </div>
+              </div>
+
+              <input type="submit" value="Hello" class="bg-orange-400" />
+
+            </div>
+          </div>
+    </form>
+</div>
+<p>data works!</p>
+<div class="h-96 flex">
+    <button class="bg-orange-300 mx-4 rounded-sm hover:bg-orange-200 h-fit w-fit p-2" (click)="viewMilk()">Diary Milk</button>
+    <div *ngIf="showMilk">
+        <div *ngFor="let item of productData">
+            <div *ngIf="item.brand == 'diarymilk'">
+                {{item.productId}}
+                {{item.brand}}
+                {{item.description}}
+                {{item.qty}}
+                {{item.price}}
+            </div>
+        </div>
+    </div>
+    
+    <button class="bg-orange-300 mx-4 rounded-sm hover:bg-orange-200 h-fit w-fit p-2" (click)="viewMagi()">Magi</button>
+    <div *ngIf="showMagi">
+        <div *ngFor="let item of productData">
+            <div *ngIf="item.brand == 'magi'">
+                {{item.productId}}
+                {{item.brand}}
+                {{item.description}}
+                {{item.qty}}
+                {{item.price}}
+            </div>
+        </div>
+    </div>
+    
+    <button class="bg-orange-300 mx-4 rounded-sm hover:bg-orange-200 h-fit w-fit p-2" (click)="viewTata()">Tata</button>
+    <div *ngIf="showTata">
+        <div *ngFor="let item of productData">
+            <div *ngIf="item.brand == 'tata'">
+                {{item.productId}}
+                {{item.brand}}
+                {{item.description}}
+                {{item.qty}}
+                {{item.price}}
+            </div>
+        </div>
+    </div>
+    
+    <button class="bg-orange-300 mx-4 rounded-sm hover:bg-orange-200 h-fit w-fit p-2" (click)="viewKerala()">Kerala</button>
+    
+    <div *ngIf="showKerala">
+        <div *ngFor="let item of productData">
+            <div *ngIf="item.brand == 'kerala'">
+                {{item.productId}}
+                {{item.brand}}
+                {{item.description}}
+                {{item.qty}}
+                {{item.price}}
+            </div>
+        </div>
+    </div>
+</div>

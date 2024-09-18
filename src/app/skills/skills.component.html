@@ -1,0 +1,18 @@
+<main class="p-48 justify-center flex flex-wrap text-center bg-slate-200" id="about">
+    <div *ngFor="let item of skillList;index as i;even as isEven;">
+        <div class="h-24 w-24 align-middle justify-items-center bg-white" *ngIf="isEven;else odd">
+            <figure class="w-fit mx-auto py-5">
+                <img class="h-6 w-6" [src]="item.img" alt="" srcset="">
+            </figure>
+            <span>{{item.name}}</span>
+        </div>
+        <ng-template #odd>
+            <div class="bg-black text-white h-24 w-24">
+                <figure class="w-fit mx-auto py-5">
+                    <img class="h-6 w-6" [src]="item.img" alt="" srcset="">
+                </figure>
+                <span>{{item.name}}</span>
+            </div>
+        </ng-template>
+    </div>
+</main>

@@ -1,0 +1,10 @@
+<nav class="w-screen flex px-16  py-3 space-x-6 text-xl fixed" [class]="backgrond">
+    <div class="w-fit me-auto my-auto text-2xl">My Portfolio</div>
+    <div class=" w-fit h-fit my-auto" *ngFor="let item of navList">
+        <a class="flex" [href]="'#'+item.id" [class]="abg"><img [src]="item.img" class="w-8 h-8 mx-4 "> {{item.name}}</a>
+    </div>
+    <button class="text-3xl w-fit" (click)="change(mode)">
+        <span *ngIf="mode;else icon"><img src="https://cdn-icons-png.flaticon.com/512/11513/11513541.png" class="w-8 h-8"/></span>
+        <ng-template #icon><img src="https://cdn-icons-png.flaticon.com/512/3751/3751205.png" class="w-8 h-8"/></ng-template>
+    </button>
+</nav>
